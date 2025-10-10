@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños, Francisquillos! 🎂🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Degradado de fondo */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* Evita barras de desplazamiento horizontales */
+            position: relative;
+        }
+
+        /* Contenedor principal de la tarjeta de cumpleaños */
+        .card-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            margin: 20px auto;
+            position: relative;
+            z-index: 10;
+            overflow: hidden; /* Para que los confetis no se salgan de la tarjeta */
+        }
+
+        /* Título principal de Feliz Cumpleaños */
+        h1 {
+            font-family: 'Pacifico', cursive; /* Fuente cursiva festiva */
+            color: #e91e63; /* Rosa vibrante */
+            font-size: 4.5em; /* Tamaño grande */
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounceIn 1s ease-out; /* Animación de rebote */
+        }
+
+        /* Estilo para el nombre del cumpleañero/a */
+        .bday-name {
+            font-family: 'Pacifico', cursive;
+            color: #00bcd4; /* Azul turquesa */
+            font-size: 3em;
+            margin-bottom: 25px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Párrafos de texto */
+        p {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para la imagen */
+        .bday-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%; /* Para hacerla circular */
+            object-fit: cover; /* Asegura que la imagen se ajuste bien */
+            border: 5px solid #ffcc00; /* Borde dorado */
+            margin: 30px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: zoomIn 1.5s ease-out;
+        }
+
+        /* Contenedor de música (oculto visualmente) */
+        .music-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        /* Estilo para el audio player */
+        audio {
+            width: 250px;
+            height: 40px;
+        }
+
+        /* --- Animaciones de Confeti (CSS puro) --- */
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f0f; /* Color base */
+            opacity: 0;
+            animation: confetti-fall 5s linear infinite;
+            border-radius: 50%; /* Para confeti circular */
+            z-index: 5;
+        }
+
+        /* Variaciones de color y retardo para el confeti */
+        .confetti-piece:nth-child(1) { top: 0%; left: 10%; background-color: #ff0; animation-delay: 0s; }
+        .confetti-piece:nth-child(2) { top: 0%; left: 20%; background-color: #0f0; animation-delay: 0.5s; }
+        .confetti-piece:nth-child(3) { top: 0%; left: 30%; background-color: #0ff; animation-delay: 1s; }
+        .confetti-piece:nth-child(4) { top: 0%; left: 40%; background-color: #f0f; animation-delay: 1.5s; }
+        .confetti-piece:nth-child(5) { top: 0%; left: 50%; background-color: #ff0; animation-delay: 2s; }
+        .confetti-piece:nth-child(6) { top: 0%; left: 60%; background-color: #0f0; animation-delay: 2.5s; }
+        .confetti-piece:nth-child(7) { top: 0%; left: 70%; background-color: #0ff; animation-delay: 3s; }
+        .confetti-piece:nth-child(8) { top: 0%; left: 80%; background-color: #f0f; animation-delay: 3.5s; }
+        .confetti-piece:nth-child(9) { top: 0%; left: 90%; background-color: #ff0; animation-delay: 4s; }
+        .confetti-piece:nth-child(10) { top: 0%; left: 5%; background-color: #f0f; animation-delay: 0.2s; width: 12px; height: 12px;}
+        .confetti-piece:nth-child(11) { top: 0%; left: 95%; background-color: #0ff; animation-delay: 1.2s; width: 8px; height: 8px;}
+        .confetti-piece:nth-child(12) { top: 0%; left: 25%; background-color: #ff0; animation-delay: 2.2s; width: 14px; height: 14px;}
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Keyframes para animaciones */
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% { opacity: 0; -webkit-transform: scale3d(.3, .3, .3); transform: scale3d(.3, .3, .3); }
+            20% { -webkit-transform: scale3d(1.1, 1.1, 1.1); transform: scale3d(1.1, 1.1, 1.1); }
+            40% { -webkit-transform: scale3d(.9, .9, .9); transform: scale3d(.9, .9, .9); }
+            60% { opacity: 1; -webkit-transform: scale3d(1.03, 1.03, 1.03); transform: scale3d(1.03, 1.03, 1.03); }
+            80% { -webkit-transform: scale3d(.97, .97, .97); transform: scale3d(.97, .97, .97); }
+            100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5em;
+            }
+            .bday-name {
+                font-size: 2.2em;
+            }
+            p {
+                font-size: 1.1em;
+            }
+            .bday-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .bday-name {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .card-container {
+                padding: 20px;
+            }
+            .bday-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+
+    <div class="card-container">
+        <h1>¡Feliz Cumpleaños!</h1>
+        <p class="bday-name">Sr. Javier Guerrero y la Sra. Ninfa Jimenez</p>
+
+        <img src="img.jpg"  alt="Foto del Sr. Javier y Sra. Ninfa" class="bday-image">
+        
+
+        <p>En este día tan especial, les deseamos todo lo mejor. Que cada momento esté lleno de risas, amor y momentos inolvidables. ¡Que disfruten mucho de su día!</p>
+        <p>Con mucho cariño, <br> att la ing </p>
+        <p>¡Muchas felicidades y que cumplan muchos más!</p>
+</div>
+
+    <div class="music-container">
+        <audio controls loop autoplay>
+            <source src="feliz-cumpleaños.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const audio = document.querySelector('audio');
+            // Intenta reproducir la música después de una pequeña interacción del usuario
+            // (esto es un truco, muchos navegadores bloquean el autoplay directo sin interacción)
+            // Se puede agregar un botón "Reproducir música" si se quiere garantizar la reproducción.
+            if (audio) {
+                audio.volume = 0.5; // Ajusta el volumen (0.0 a 1.0)
+                const playPromise = audio.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Reproducción automática iniciada
+                    }).catch(error => {
+                        // La reproducción automática fue bloqueada, puedes mostrar un mensaje
+                        console.log("Autoplay de música bloqueado. El usuario deberá interactuar.");
+                        // O puedes mostrar un botón para que el usuario la inicie
+                        // alert("Haz click en la página para escuchar la música!");
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
